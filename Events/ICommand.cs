@@ -1,4 +1,4 @@
-﻿namespace hazped.sharedkernel.Messaging;
+﻿namespace hazped.sharedkernel.Events;
 
 /// <summary>
 /// Marker interface to represent a command with a void response

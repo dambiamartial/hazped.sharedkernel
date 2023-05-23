@@ -1,4 +1,4 @@
-﻿namespace hazped.sharedkernel.Messaging;
+﻿namespace hazped.sharedkernel.Events;
 
 /// <summary>
 /// Defines a handler for a query

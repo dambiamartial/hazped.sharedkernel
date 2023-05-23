@@ -2,9 +2,10 @@
 global using System.Linq.Expressions;
 global using Microsoft.AspNetCore.Http;
 global using System.Security.Claims;
-global using hazped.sharedkernel.Messaging;
 global using Microsoft.EntityFrameworkCore;
 global using FluentValidation;
 global using Microsoft.Extensions.Logging;
 global using System.Diagnostics;
 global using System.Reflection;
+global using hazped.sharedkernel.Primitives;
+global using hazped.sharedkernel.Events;

@@ -1,57 +1,53 @@
-﻿namespace hazped.sharedkernel;
+﻿namespace hazped.sharedkernel.Primitives;
 
-public abstract class AggregateRoot<TId, TIdType> : Entity<TId>
-    where TId : AggregateRootId<TIdType>
+public abstract class AggregateRoot<TId, TIdType> : Entity<TId> where TId : AggregateRootId<TIdType>
 {
-    public new AggregateRootId<TIdType> Id { get; protected set; }
-    protected AggregateRoot(TId id) => Id = id;
+    //public new AggregateRootId<TIdType> Id { get; protected set; }
 
-#pragma warning disable CS8618
-    protected AggregateRoot() { }
-#pragma warning restore CS8618
+    protected AggregateRoot(TId id) : base(id) => Id = id;
 
     /// <summary>
-    /// Aggretate verion
+    /// Aggregate version
     /// </summary>
     public long Version { get; private set; } = -1;
 
     /// <summary>
     /// Aggregate events
     /// </summary>
-    private List<IEvent>? _events;
+    private List<IDomainEvent>? _domainEvents;
 
     /// <summary>
     /// Get events
     /// </summary>
-    public IReadOnlyCollection<IEvent>? GetEvents => _events?.AsReadOnly();
+    public IReadOnlyCollection<IDomainEvent>? GetDomainEvents => _domainEvents?.AsReadOnly();
 
     /// <summary>
     /// Add event to aggregate events
     /// </summary>
     /// <param name="event"></param>
-    public void RaiseEvent(IEvent @event)
+    public void RaiseEvent(IDomainEvent @event)
     {
-        _events ??= new();
-        _events.Add(@event);
+        _domainEvents ??= new();
+        _domainEvents.Add(@event);
     }
 
     /// <summary>
     /// Clear all aggregate events
     /// </summary>
-    public void CommitEvents() => _events?.Clear();
+    public void CommitDomainEvents() => _domainEvents?.Clear();
 
     /// <summary>
-    /// Remove a specific aggregate event
+    /// Remove a specific domain event
     /// </summary>
     /// <param name="event"></param>
-    public void RemoveEvent(IEvent @event) => _events?.Remove(@event);
+    public void RemoveDomainEvent(IDomainEvent @event) => _domainEvents?.Remove(@event);
 
     /// <summary>
     /// Apply event to aggregate
     /// </summary>
-    /// <param name="event">Evenement courant</param>
-    /// <param name="isPrevious">Previously registred event</param>
-    public void ApplyEvent(IEvent @event, bool isPrevious = false)
+    /// <param name="event">Current event</param>
+    /// <param name="isPrevious">Previously registered event</param>
+    public void ApplyEvent(IDomainEvent @event, bool isPrevious = false)
     {
         ((dynamic)this).When((dynamic)@event);
 
@@ -63,17 +59,17 @@ public abstract class AggregateRoot<TId, TIdType> : Entity<TId>
     }
 
     /// <summary>
-    /// Rehydratation de l'agrégat
+    /// Aggregate rehydration
     /// </summary>
     /// <param name="events">Events list</param>
-    public void RehydrateEvents(IEnumerable<IEvent> events)
+    public void RehydrateEvents(IEnumerable<IDomainEvent> events)
     {
         foreach (var @event in events)
         {
             //Apply event to aggregate
             ApplyEvent(@event, true);
 
-            //Increment aggregate verion
+            //Increment aggregate version
             Version++;
         }
     }
@@ -82,5 +78,5 @@ public abstract class AggregateRoot<TId, TIdType> : Entity<TId>
     /// Check the event type to apply to the aggregate
     /// </summary>
     /// <param name="event">Event</param>
-    protected abstract void When(IEvent @event);
+    protected abstract void When(IDomainEvent @event);
 }

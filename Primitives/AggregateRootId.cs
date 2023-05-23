@@ -1,4 +1,4 @@
-﻿namespace hazped.sharedkernel;
+﻿namespace hazped.sharedkernel.Primitives;
 
 public abstract class AggregateRootId<TId> : ValueObject
 {
