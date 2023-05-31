@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>Shared libray</Title>
-    <Version>0.0.0.103</Version>
+    <Version>0.0.0.107</Version>
     <Authors>Martial DAMBIA</Authors>
     <Company>hazped</Company>
     <Copyright>hazped@2023</Copyright>
