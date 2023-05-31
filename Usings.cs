@@ -9,3 +9,4 @@ global using System.Diagnostics;
 global using System.Reflection;
 global using hazped.sharedkernel.Primitives;
 global using hazped.sharedkernel.Events;
+global using hazped.sharedkernel.Interfaces;

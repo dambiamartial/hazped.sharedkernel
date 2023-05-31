@@ -3,9 +3,9 @@
 /// <summary>
 /// Aggregates state validation
 /// </summary>
-public class InValidStateException : Exception
+public partial class InValidStateException : Exception
 {
-    internal InValidStateException(string message) : base(message)
+    public InValidStateException(string message) : base(message)
     {
         Errors = new List<string>();
     }

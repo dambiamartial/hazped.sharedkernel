@@ -1,6 +1,6 @@
 ﻿namespace hazped.sharedkernel.Primitives;
 
-public abstract class AggregateRoot<TId, TIdType> : Entity<TId> where TId : AggregateRootId<TIdType>
+public abstract class AggregateRoot<TId, TIdType> : Entity<TId>,IAggregateRoot where TId : AggregateRootId<TIdType>
 {
     //public new AggregateRootId<TIdType> Id { get; protected set; }
 
@@ -19,7 +19,7 @@ public abstract class AggregateRoot<TId, TIdType> : Entity<TId> where TId : Aggr
     /// <summary>
     /// Get events
     /// </summary>
-    public IReadOnlyCollection<IDomainEvent>? GetDomainEvents => _domainEvents?.AsReadOnly();
+    public IReadOnlyCollection<IDomainEvent>? GetDomainEvents() => _domainEvents?.AsReadOnly();
 
     /// <summary>
     /// Add event to aggregate events

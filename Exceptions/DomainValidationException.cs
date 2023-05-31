@@ -3,9 +3,9 @@
 /// <summary>
 /// Domain's events validation
 /// </summary>
-public class DomainValidationException : Exception
+public partial class DomainValidationException : Exception
 {
-    internal DomainValidationException(string message) : base(message)
+    public DomainValidationException(string message) : base(message)
     {
         ValidationErrors = new List<string>();
     }

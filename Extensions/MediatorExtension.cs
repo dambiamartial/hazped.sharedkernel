@@ -8,11 +8,11 @@ static class MediatorExtension
 
         //Get hold of all the various entities
         var entitiesWithDomainEvents = dbContext.ChangeTracker.Entries<AggregateRoot<TId, TIdType>>()
-            .Where(entry => entry.Entity.GetDomainEvents is not null && entry.Entity.GetDomainEvents.Count != 0)
+            .Where(entry => entry.Entity.GetDomainEvents() is not null && entry.Entity.GetDomainEvents()!.Count != 0)
             .Select(entry => entry.Entity).ToList();
 
         //Get hold of all the various domain events
-        var domainEvents = entitiesWithDomainEvents.SelectMany(entry => entry.GetDomainEvents!).ToList();
+        var domainEvents = entitiesWithDomainEvents.SelectMany(entry => entry.GetDomainEvents()!).ToList();
 
         //Clear domain events
         entitiesWithDomainEvents.ForEach(entity => entity.CommitDomainEvents());
