@@ -4,7 +4,7 @@ public abstract class AggregateRoot<TId, TIdType> : Entity<TId>,IAggregateRoot w
 {
     //public new AggregateRootId<TIdType> Id { get; protected set; }
 
-    protected AggregateRoot(TId id) : base(id) => Id = id;
+    //protected AggregateRoot(TId id) : base(id) => Id = id;
 
     /// <summary>
     /// Aggregate version

@@ -2,19 +2,19 @@
 
 public abstract class Entity<TId> : IEquatable<Entity<TId>> where TId : notnull
 {
-    public TId Id { get; protected set; }
+    public virtual TId? Id { get; protected set; }
 
-    protected Entity(TId id)
-    {
-        Id = id;
-    }
+    //protected Entity(TId id)
+    //{
+    //    Id = id;
+    //}
 
     /// <summary>
     /// Check the equality from the object to the current object
     /// </summary>
     /// <param name="obj">Object to check the equality</param>
     /// <returns>True if the checked object is equals to the current</returns>
-    public override bool Equals(object? obj) => obj is Entity<TId> entity && Id.Equals(entity.Id);
+    public override bool Equals(object? obj) => obj is Entity<TId> entity && Id!.Equals(entity.Id);
 
     /// <summary>
     /// check the equality between two entities
@@ -43,13 +43,13 @@ public abstract class Entity<TId> : IEquatable<Entity<TId>> where TId : notnull
     /// Get the entity hash code
     /// </summary>
     /// <returns>hash code</returns>
-    public override int GetHashCode() => Id.GetHashCode();
+    public override int GetHashCode() => Id!.GetHashCode();
 
     /// <summary>
     /// Check if is transient entity
     /// </summary>
     /// <returns>true if transient</returns>
-    public bool IsTransient() => Id.Equals(default);
+    public bool IsTransient() => Id!.Equals(default);
 
     DateTime _createdAt;
     DateTime _lastModifiedAt;
