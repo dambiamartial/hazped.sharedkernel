@@ -6,7 +6,7 @@ namespace hazped.sharedkernel.Common;
 
 public static class TwilioTextMessageSender
 {
-    public static async Task<bool> SendMessage(string to, string body, string sid, string authToken, string number)
+    public static async Task<bool> SendMessage(ILogger logger, string to, string body, string sid, string authToken, string number)
     {
         TwilioClient.Init(sid, authToken);
 
@@ -20,12 +20,11 @@ public static class TwilioTextMessageSender
             to: new Twilio.Types.PhoneNumber(to)
             );
             isSucceed = true;
-            Console.WriteLine(message.Sid);
+            logger.LogInformation($"Message sent to {to}");
         }
         catch (ApiException e)
         {
-            Console.WriteLine(e.Message);
-            Console.WriteLine($"Twilio Error {e.Code} - {e.MoreInfo}");
+            logger.LogError($"Error sending message to {to} : Error {e.Code} - {e.MoreInfo}");
         }
         finally { }
 
