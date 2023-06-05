@@ -71,4 +71,7 @@ public abstract class Entity<TId> : IEquatable<Entity<TId>> where TId : notnull
         get => _lastModifiedAt;
         protected set => _lastModifiedAt = value != default ? value : DateTime.Now;
     }
+
+    public virtual Guid CreatedBy { get; protected set; }
+    public virtual Guid UpdatedBy { get; protected set; }
 }
