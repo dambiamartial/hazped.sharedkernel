@@ -2,10 +2,10 @@
 
 public abstract class AggregateRootId<TId> : ValueObject
 {
-    public TId Id { get; protected set; }
+    public TId Value { get; protected set; }
 
-    protected AggregateRootId(TId id)
+    protected AggregateRootId(TId value)
     {
-        Id = id;
+        Value = value;
     }
 }
